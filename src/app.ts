@@ -4,7 +4,13 @@ import * as modules from './modules/index';
 
 
 const username = (props?: types.username_type.username_props_type): string => {
-    return modules.username.usernameGenerator(props ? props : null);
+
+    if(props){
+        
+    return modules.username.usernameGenerator(props);
+    }else {
+    return modules.username.usernameGenerator(defaultUserNameProps);
+    }
 }
 
 const password = (): string => {

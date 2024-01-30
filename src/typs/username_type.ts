@@ -13,7 +13,7 @@ type numeric = {
     allowNumber?:boolean,
     min?:number,
     max?:number,
-    requiredNumber?:Array<String>
+    requiredNumber?:Array<number>
     NotRequiredNumber?:Array<String>,
     noOfCount?:number 
 }

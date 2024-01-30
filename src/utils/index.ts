@@ -6,7 +6,7 @@ function ratioFinding(maxLength: number, minLength: number, ratio: number) {
 }
 
 function randomCharCreating(): { numbers: number, specialChar: string, stringWithLowerCase: string, stringWithUpperCase: string, StringWithLowerAndUpperCase: string } {
-    let letters = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ";
+    let letters = ("abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ");
     let numbres = "1234567890";
     let specialChar = "!@#$%^&*()-_+={}[];:'\",.<>/\\|`~?"
 
@@ -20,10 +20,8 @@ function randomCharCreating(): { numbers: number, specialChar: string, stringWit
         stringWithUpperCase: random(letters).toUpperCase(),
         StringWithLowerAndUpperCase: random(letters),
         specialChar: random(specialChar),
-
     }
 }
-
 
 
 function makingStringWithDataType(dataType: types.constType.default_data_types, size: number): string {

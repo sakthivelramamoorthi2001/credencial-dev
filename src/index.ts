@@ -1,6 +1,6 @@
 import * as app from './app';
 import * as types from './typs/index';
 
-import { makingStringWithDataType } from './utils';
-let username = app.username({attributes:{maxLength:7}, alpha:{noOfCount:5}});
+
+let username = app.username({alpha:{noOfCount:10}});
 console.log(username, 'user name', );

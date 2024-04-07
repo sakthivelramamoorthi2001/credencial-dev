@@ -18,7 +18,7 @@ type numeric = {
   noOfCount?: number;
 };
 
-type speacial_char = {
+type special_char = {
   allowSpecialChar?: boolean;
   requiredChar?: Array<String>;
   NotRequiredChar?: Array<String>;
@@ -39,7 +39,7 @@ type attributes_of_username = {
 type username_props_type = {
   alpha?: alpha;
   numeric?: numeric;
-  speacial_char?: speacial_char;
+  special_char?: special_char;
   domain?: domain;
   attributes?: attributes_of_username;
 };
@@ -51,7 +51,7 @@ type MakeRequired<T> = {
 type username_props_required_type = {
   alpha: MakeRequired<alpha>;
   numeric: MakeRequired<numeric>;
-  speacial_char: MakeRequired<speacial_char>;
+  special_char: MakeRequired<special_char>;
   domain: MakeRequired<domain>;
   attributes: MakeRequired<attributes_of_username>;
 };

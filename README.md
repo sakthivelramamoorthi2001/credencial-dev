@@ -19,11 +19,42 @@ npm install credencial-dev
 
 ```
 
-## Installation step 2
 
 ```bash
-import { username } from 'credencial-dev'
+
+# Import the username function from the credencial-dev package
+import { username } from "credencial-dev";
+
+# Generate a username using the specified configuration options
+generatedUsername=$(username({
+  alpha: {
+    noOfCount: 6,
+    lowerCase: false,
+    uperCase: false,
+    allowAlpha: true,
+    requiredChar: ["s", "a", "k", "t", "h", "i"],
+    NotRequiredChar: ["z", "a"],
+  },
+  numeric: {
+    allowNumber: true,
+    noOfCount: 2,
+  },
+  special_char: {
+    allowSpecialChar: true,
+    noOfCount: 1,
+  },
+  domain: {
+    allowDomain: true,
+  },
+  attributes: {
+    minLength: 5,
+    maxLength: 10,
+  }
+  )}
+  )
+
+# Output the generated username
+echo $generatedUsername  # Output: Generated username
+
 ```
-
-
 <img src="https://github.com/sakthivelramamoorthi2001/credencial-dev/assets/130210612/35327401-4113-4c89-b489-6bcd4db96340" width="100%" height="800">

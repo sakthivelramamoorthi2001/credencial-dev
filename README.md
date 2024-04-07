@@ -25,4 +25,5 @@ npm install credencial-dev
 import { username } from 'credencial-dev'
 ```
 
-![credencial-dev](https://github.com/sakthivelramamoorthi2001/credencial-dev/assets/130210612/35327401-4113-4c89-b489-6bcd4db96340)
+
+<img src="https://github.com/sakthivelramamoorthi2001/credencial-dev/assets/130210612/35327401-4113-4c89-b489-6bcd4db96340" width="400" height="200">

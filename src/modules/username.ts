@@ -1,74 +1,90 @@
 import { throws } from "assert";
-import { defaultUserNameProps } from "../constant/username"
-import * as types from '../typs/index';
-import { makingStringWithDataType } from "../utils";
+import { defaultUserNameProps } from "../constant/username";
+import * as types from "../typs/index";
+import { makingStringWithDataType, mergeObjects } from "../utils";
 
+const usernameGenerator = (props: types.username_type.username_props_type) => {
+  let mergedProps = defaultUserNameProps;
 
+  console.log(mergedProps, "ss");
+  return "";
 
-const usernameGenerator = (props: types.username_type.username_props_type | null): string => {
+  let responseUserName: string = "";
 
-    
-    
-    const mergedProps: types.username_type.username_props_required_type = { ...defaultUserNameProps, ...props};
+  validationChencking(mergedProps);
 
-}
-    console.log(mergedProps);
+  if (mergedProps.alpha.allowAlpha) {
+    responseUserName += alphaBeticWordCreating(mergedProps);
+  }
 
-    let responseUserName: string = "";
+  if (mergedProps.numeric.allowNumber) {
+    responseUserName += numericWordCreating(mergedProps);
+  }
 
-    validationChencking(mergedProps);
+  if (mergedProps.speacial_char.allowSpecialChar) {
+    responseUserName += specialCharWordCreating(mergedProps);
+  }
 
-    if (mergedProps.alpha.allowAlpha) {
-        responseUserName += alphaBeticWordCreating(mergedProps);
-    }
+  return responseUserName.substring(0, mergedProps.attributes.maxLength);
+};
 
-    if (mergedProps.numeric.allowNumber) {
-        responseUserName += numericWordCreating(mergedProps);
-    }
+function validationChencking(
+  mergedProps: types.username_type.username_props_required_type
+) {
+  let overAllNoOfCount: number =
+    mergedProps.alpha.noOfCount +
+    mergedProps.numeric.noOfCount +
+    mergedProps.speacial_char.noOfCount;
 
-    if (mergedProps.speacial_char.allowSpecialChar) {
-        responseUserName += specialCharWordCreating(mergedProps)
-    }
+  if (mergedProps.attributes.minLength > overAllNoOfCount) {
+    throw new Error("attribute minimum length is not valid");
+  }
 
-    return responseUserName.substring(0, mergedProps.attributes.maxLength);
-}
-
-function validationChencking(mergedProps: types.username_type.username_props_required_type){
-
-    let overAllNoOfCount:number =  mergedProps.alpha.noOfCount + mergedProps.numeric.noOfCount + mergedProps.speacial_char.noOfCount
-
-    if(mergedProps.attributes.minLength > overAllNoOfCount ){
-        throw new Error("attribute minimum length is not valid");
-    }
-
-    if(mergedProps.attributes.maxLength < overAllNoOfCount ){
-       mergedProps.attributes.maxLength = overAllNoOfCount ;
-    }
-
+  if (mergedProps.attributes.maxLength < overAllNoOfCount) {
+    mergedProps.attributes.maxLength = overAllNoOfCount;
+  }
 }
 
-function alphaBeticWordCreating(mergedProps: types.username_type.username_props_required_type): string {
+function alphaBeticWordCreating(
+  mergedProps: types.username_type.username_props_required_type
+): string {
+  if (
+    (mergedProps.alpha.lowerCase && !mergedProps.alpha.uperCase) ||
+    (!mergedProps.alpha.lowerCase && mergedProps.alpha.uperCase)
+  ) {
+    console.log("11");
+    return makingStringWithDataType(
+      mergedProps.alpha.lowerCase
+        ? types.constType.default_data_types.stringWithLowerCase
+        : types.constType.default_data_types.stringWithUpperCase,
+      mergedProps.alpha.noOfCount
+    );
+  } else {
+    console.log("2");
 
-    if ((mergedProps.alpha.lowerCase && !mergedProps.alpha.uperCase) || (!mergedProps.alpha.lowerCase && mergedProps.alpha.uperCase)) {
-        console.log("11");
-        return  makingStringWithDataType(mergedProps.alpha.lowerCase ? types.constType.default_data_types.stringWithLowerCase : types.constType.default_data_types.stringWithUpperCase, mergedProps.alpha.noOfCount);
-    } else {
-        console.log("2");
-
-        return makingStringWithDataType(types.constType.default_data_types.StringWithLowerAndUpperCase, mergedProps.alpha.noOfCount);
-    }
+    return makingStringWithDataType(
+      types.constType.default_data_types.StringWithLowerAndUpperCase,
+      mergedProps.alpha.noOfCount
+    );
+  }
 }
 
-function numericWordCreating(mergedProps: types.username_type.username_props_required_type): string {
-    return makingStringWithDataType(types.constType.default_data_types.number, mergedProps.numeric.noOfCount);
-    
+function numericWordCreating(
+  mergedProps: types.username_type.username_props_required_type
+): string {
+  return makingStringWithDataType(
+    types.constType.default_data_types.number,
+    mergedProps.numeric.noOfCount
+  );
 }
 
-function specialCharWordCreating(mergedProps: types.username_type.username_props_required_type): string {
-    return makingStringWithDataType(types.constType.default_data_types.specialChar, mergedProps.speacial_char.noOfCount);
+function specialCharWordCreating(
+  mergedProps: types.username_type.username_props_required_type
+): string {
+  return makingStringWithDataType(
+    types.constType.default_data_types.specialChar,
+    mergedProps.speacial_char.noOfCount
+  );
 }
 
-export {
-    usernameGenerator
-}
-
+export { usernameGenerator };
